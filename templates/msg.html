@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <title>a-msg</title>
+  </head>
+  <body>
+    <h1> A-msg </h1>
+
+     <div class="conatainer" style="text-align:center; color:red">
+       {{alert}}
+     </div>
+
+    <div class="container">
+
+      <div class="conatiner">
+        {% for msg in msgs %}
+          {% if(msg.msg.strip()|length != 0) %}
+
+        <ul class="list-group" >
+          {% if(msg.sender == 'me') %}
+          <li class="list-group-item mt-0" style="background-color:mistyrose"><span class="badge badge-primary mt-0 mb-3 pt-0 mr-2">{{msg.sender}} | {{msg.time[11:19]}}</span><br>{{msg.msg}}</li>
+           {% endif %}
+           {% if(msg.sender != 'me') %}
+            <li class="list-group-item" style="text-align:right; background-color:mintcream "><span class="badge badge-primary mt-0 mb-3 pt-0 mr-2">{{msg.sender}} | {{msg.time[11:19]}}</span><br>{{msg.msg}}</li>
+           {% endif %}
+        </ul>
+           {% endif %}
+         {% endfor %}
+      </div>
+
+      <div class="container-fluid">
+        <form  method="POST" >
+          <div class="input-group mb-3 mt-3">
+            <input type="text" class="form-control" autocomplete="off" placeholder="Type message" aria-label="msg" aria-describedby="button-addon2" name="msg">
+            <div class="input-group-append">
+             <button type="submit" class="btn btn-outline-secondary"  id="button-addon2">Send</button>
+               <a href="/refresh" type="button" class="btn btn-dark">RFRS</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="conatainer" style="text-align:center; color:red">
+      {{alert}}
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        window.scrollTo(0,document.body.scrollHeight);
+    </script>
+  </body>
+</html>

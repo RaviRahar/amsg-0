@@ -1,0 +1,57 @@
+               Anonymous-messaging
+
+Amsg is end-end encrypted client-server messaging app, which allows you to connect using ip and tor domain name. while using tor your IP also became hidden. It gives you feature like end-to-end encryption, hiding yourself.
+Amsg divide into 2 parts-
+   srv
+   cli
+
+   Srv using server side socket programming which have capabilty to broadcast messages over collection of connected IPs and recieve their messages
+   Cli using client side socket programmng which have limitations a of now, Cli can only interact with Srv only.
+
+
+
+
+Installation-
+
+  1. Download amsg package
+  2. get into folder.
+  If you  want to use virtual environment. Steps to setup virtual environment-
+       1. pip install virtualenv
+         (get into directory where you want to create env)
+       2. python3 -m venv env
+          (activate env)
+
+       3.      {linux}
+          source env/bin/activate
+
+               {windows}
+          cd env/Scripts
+          activate.bat   {cmd}
+          Activate.ps    {powershell}
+
+  3. pip3 install requirements.txt
+  4. (make sure you're in original folder)
+     python3 amsg.py --help
+
+How to use tor hidden service-
+{Linux- Debian}
+    1. apt install tor
+    2. sudo nano /etc/tor/torrc
+    3. Add these lines-  HiddenServiceDir /var/lib/tor/amsg_hidden_service/
+                         HiddenServicePort 9999 127.0.0.1:9999
+    4. sudo service tor start
+    5. login to root user, then
+           cat /var/lib/tor/amsg_hidden_service/hostname
+{Windows}
+    1. Download tor window expert bundle from here https://www.torproject.org/download/tor/
+    2. Follow some sort of tutorial to start tor hiddenservice in windows?
+        https://miloserdov.org/?p=1839
+
+  6. Start server at same port as HiddenServicePort at localhost,
+     share hidden service hostname with person who wants to connect you.
+     cli use that address in --ip option
+
+* Users identity like user_name doesn't matter here they will just vary. Allocating fix userid,ip will only create seurity holes(name,ip spoofing).
+* Username stored into database for one time view only purpose.
+* Users are suggested to clean database as soons as chat ended.
+* Amsg is still in development, as of now it lack in security and error handling.
